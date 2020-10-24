@@ -1,4 +1,4 @@
-﻿// Manages the game's options
+// Manages the game's options
 // linking UI to their actual parameters, saving and loading options
 
 using UnityEngine;
@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class OptionsHandler : MonoBehaviour
 {
-    [Header("Controlled elements 2")]
+    [Header("Controlled elements")]
     public DetectorClient detectorClient;
     public stars starHandler;
     public CameraController cameraController;
@@ -18,6 +18,8 @@ public class OptionsHandler : MonoBehaviour
     [Header("Scene config inputs")]
     public Slider starCount;
     public Slider starSize;
+    public Slider horizon;
+    [Header("Interactions config inputs")]
     public Slider autoAdvanceSpeed;
     public Slider forwardSpeed;
     public Slider backwardSpeed;
@@ -46,9 +48,9 @@ public class OptionsHandler : MonoBehaviour
         initOption("scene.starSize", starSize, (float val) => starHandler.starSize = val, 3f);
 
         // Interactions config
-        initOption("scene.autoAdvanceSpeed", autoAdvanceSpeed, (float val) => cameraController.autoAdvanceSpeed = val, 0.001f);
-        initOption("scene.forwardSpeed", forwardSpeed, (float val) => cameraController.speedForward = val, 0.02f);
-        initOption("scene.backwardSpeed", backwardSpeed, (float val) => cameraController.speedBackward = val, 0.01f);
+        initOption("interactions.autoAdvanceSpeed", autoAdvanceSpeed, (float val) => cameraController.autoAdvanceSpeed = val, 0.001f);
+        initOption("interactions.forwardSpeed", forwardSpeed, (float val) => cameraController.speedForward = val, 0.02f);
+        initOption("interactions.backwardSpeed", backwardSpeed, (float val) => cameraController.speedBackward = val, 0.01f);
     }
 
     // Initialize a float config option: load from playerprefs, default value, update the global
