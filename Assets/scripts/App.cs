@@ -7,11 +7,12 @@ public class App : MonoBehaviour
     public Canvas ui;
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
         Application.targetFrameRate = 30;
         Screen.fullScreen = true;
 
+        yield return 0;
         ui = GameObject.FindObjectOfType<Canvas>();
         ui.gameObject.SetActive(false);
     }

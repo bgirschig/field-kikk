@@ -54,6 +54,15 @@ public class stars : MonoBehaviour {
     // FitStars();
   }
 
+  float _starSize;
+  public float starSize {
+    get { return _starSize; }
+    set {
+      for (int i = 0; i < starCount; i++) points[i].startSize = value;
+      _starSize = value;
+    }
+  }
+
   void FitStars() {
     // Loop particles around so that we can have a small number of particles "following" the
     // camera. We're using camera-space position rather than viewport positions because looping
@@ -78,11 +87,11 @@ public class stars : MonoBehaviour {
 
       points[i].position = Camera.main.cameraToWorldMatrix.MultiplyPoint(relativePos);  
     }
-    star_particleSystem.SetParticles(points, points.Length);
   }
 
   void Update() {
     FitStars();
+    star_particleSystem.SetParticles(points, points.Length);
   }
 
   float Map(float val, float from1, float from2, float to1, float to2) {

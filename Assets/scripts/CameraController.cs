@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
     public DetectorClient detectorClient;
     public float speedForward = 0.02f;
     public float speedBackward = 0.01f;
+    public float autoAdvanceSpeed = 0;
 
     private float currentVelocity = 0;
     private float target = 0;
@@ -24,6 +25,7 @@ public class CameraController : MonoBehaviour
     {
         if (detectorClient.speed > 0) target += detectorClient.speed * speedBackward;
         else target += detectorClient.speed * speedForward;
+        target -= autoAdvanceSpeed * Time.deltaTime;
 
         current = Mathf.SmoothDampAngle(current, target, ref currentVelocity, 0.3f);
         transform.rotation = Quaternion.Euler(current, 0, 0);

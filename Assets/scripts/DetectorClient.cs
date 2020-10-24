@@ -27,7 +27,6 @@ public class DetectorClient : MonoBehaviour {
     public float speed;
 
     float last_detection_time = 0;
-    float delayBetweenDetections = 1/25;
     RollingArrayFloat prevValues;
     RollingArrayFloat prevSpeeds;
     
@@ -38,12 +37,18 @@ public class DetectorClient : MonoBehaviour {
     bool _debug;
     public bool debug {
         get { return _debug; }
-        set { stub.sendAction<bool>("setDebug", value); }
+        set {
+            stub.sendAction<bool>("setDebug", value);
+            _debug = value;
+        }
     }
     bool _active;
     public bool active {
         get { return _active; }
-        set { stub.sendAction<bool>("setActive", value); }
+        set {
+            stub.sendAction<bool>("setActive", value);
+            _active = value;
+        }
     }
 
     void Start() {
@@ -119,6 +124,7 @@ public class DetectorClient : MonoBehaviour {
     }
 
     public void selectInput(int id) {
+        Debug.Log("selectInput: "+id);
         switch (inputOptions[id]) {
             case "disabled":
             case "emulator":
