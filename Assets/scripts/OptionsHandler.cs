@@ -44,8 +44,8 @@ public class OptionsHandler : MonoBehaviour
         initOption("detector.flip", flipValues, val => detectorClient.flip = val, false);
 
         // Scene config
-        initOption("scene.starCount", starCount, (int val) => starHandler.setStarCount(val), 3000);
-        initOption("scene.starSize", starSize, (float val) => starHandler.starSize = val, 3f);
+        initOption("scene.starCount", starCount, (int val) => starHandler.setStarCount(val), 10000);
+        initOption("scene.starSize", starSize, (float val) => starHandler.starSize = val, 1.5f);
         initOption("scene.horizon", horizon, (float val) => Camera.main.transform.localRotation = Quaternion.Euler(val, 0, 0), 0);
 
         // Interactions config
