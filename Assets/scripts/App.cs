@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Diagnostics;
 
 public class App : MonoBehaviour
 {
@@ -22,5 +23,11 @@ public class App : MonoBehaviour
     {
         if (Input.GetKeyDown("m")) ui.gameObject.SetActive(!ui.gameObject.activeInHierarchy);
         if (Input.GetKeyDown("f")) Screen.fullScreen = !Screen.fullScreen;
+    }
+
+    // Deliberately crash the app to see if it restarts properly
+    public void crash() {
+        Debug.Log("Crashing the app");
+        Utils.ForceCrash(ForcedCrashCategory.FatalError);
     }
 }
