@@ -2,6 +2,7 @@
 
 public class stars : MonoBehaviour {
   public int starCount = 1000;
+  public bool rotate = true;
 
   private ParticleSystem.Particle[] points;
   private ParticleSystem star_particleSystem;
@@ -41,7 +42,7 @@ public class stars : MonoBehaviour {
 
       points[i].startSize = Random.Range(1f, 5f);
       points[i].startColor = new Color(1, 1, 1, 1);
-      points[i].rotation = Random.Range(0, 90);
+      if (rotate) points[i].rotation = Random.Range(0, 90);
     }
 
     star_particleSystem = gameObject.GetComponent<ParticleSystem>();

@@ -5593,6 +5593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   starCount: 1000
+  rotate: 0
 --- !u!114 &331515280 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2242120712658776536, guid: 22cad95b2c6e24f31b9195de005a4f54,
@@ -7886,7 +7887,7 @@ PrefabInstance:
     - target: {fileID: 2242120712658776536, guid: 22cad95b2c6e24f31b9195de005a4f54,
         type: 3}
       propertyPath: m_MaxValue
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2242120712658776536, guid: 22cad95b2c6e24f31b9195de005a4f54,
         type: 3}
