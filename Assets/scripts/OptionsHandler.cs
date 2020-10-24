@@ -1,4 +1,4 @@
-// Manages the game's options
+﻿// Manages the game's options
 // linking UI to their actual parameters, saving and loading options
 
 using UnityEngine;
@@ -46,6 +46,7 @@ public class OptionsHandler : MonoBehaviour
         // Scene config
         initOption("scene.starCount", starCount, (int val) => starHandler.setStarCount(val), 3000);
         initOption("scene.starSize", starSize, (float val) => starHandler.starSize = val, 3f);
+        initOption("scene.horizon", horizon, (float val) => Camera.main.transform.localRotation = Quaternion.Euler(val, 0, 0), 0);
 
         // Interactions config
         initOption("interactions.autoAdvanceSpeed", autoAdvanceSpeed, (float val) => cameraController.autoAdvanceSpeed = val, 0.001f);
