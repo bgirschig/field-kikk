@@ -10,6 +10,12 @@ public class OnValueEvent {
   public float time;
 }
 
+public class GenericEvent {
+  public string type;
+  public string value;
+  public float time;
+}
+
 public class DetectorStub {
   WebSocket ws = null;
   string host;
@@ -26,6 +32,7 @@ public class DetectorStub {
   DateTime lastConnectionAttempt;
 
   public event EventHandler<OnValueEvent> onValue;
+  public event EventHandler<GenericEvent> onEvent;
 
   public DetectorStub(string host="localhost:9000") {
     this.host = host;
@@ -39,8 +46,10 @@ public class DetectorStub {
 
     float? latestValue = null;
     float? latestTime = null;
+
     while (pendingMessages.Count > 0) {
       DetectorMessage message = pendingMessages.Dequeue();
+
       switch (message.type) {
           case "detectorValue":
             float time = float.Parse(message.arrayValue[1]);
@@ -50,6 +59,11 @@ public class DetectorStub {
             }
             break;
           default:
+            GenericEvent evt = new GenericEvent();
+            evt.time = Time.time;
+            evt.value = message.value;
+            evt.type = message.type;
+            onEvent?.Invoke(this, evt);
             break;
       }
     }

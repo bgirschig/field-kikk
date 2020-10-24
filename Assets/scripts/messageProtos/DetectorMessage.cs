@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MessageProtos {
   // Used to communicate with the detector
-  // value and arrayValue are separate because I can't figure out how to parse tvarying data types
+  // value and arrayValue are separate because I can't figure out how to parse varying data types
   // with newtonsofts JSON lib
   public class DetectorMessage {
     public string type;

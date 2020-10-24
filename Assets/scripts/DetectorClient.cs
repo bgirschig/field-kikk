@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Text;
 
 public enum ColorChannel { Red, Green, Blue };
 
@@ -14,6 +15,7 @@ public class DetectorClient : MonoBehaviour {
 
     public List<string> inputOptions;
     string inputMode;
+    public Texture2D cameraTexture;
 
     [NonSerialized]
     public float position;
@@ -47,6 +49,7 @@ public class DetectorClient : MonoBehaviour {
     void Start() {
         stub = new DetectorStub("localhost:9000");
         stub.onValue += onValue;
+        stub.onEvent += onEvent;
 
         prevValues = new RollingArrayFloat(5);
         prevSpeeds = new RollingArrayFloat(5);
@@ -59,6 +62,8 @@ public class DetectorClient : MonoBehaviour {
         inputOptions.Add("emulator");
         inputOptions.Add("video");
         inputOptions.Add("disabled");
+
+        cameraTexture = new Texture2D(2,2);
 
         // selectInput("Logitech Webcam C930e");
         // selectInput("emulator");
@@ -98,6 +103,19 @@ public class DetectorClient : MonoBehaviour {
 
         detectedSpeed = (evt.value - detectedValue) / deltaT;
         detectedValue = evt.value;
+    }
+
+    public void onEvent(object sender, GenericEvent evt) {
+        if (evt.type == "cameraFrame") {
+            string imageStr = evt.value;
+            string[] parts = imageStr.Split(',');
+            byte[] decodedBytes = Convert.FromBase64String(parts[1]);
+            ImageConversion.LoadImage(cameraTexture, decodedBytes);
+        }
+    }
+
+    public void requestFrame() {
+        stub.sendAction<string>("getFrame", "");
     }
 
     public void selectInput(int id) {

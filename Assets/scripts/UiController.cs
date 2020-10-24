@@ -25,8 +25,6 @@ public class UiController : MonoBehaviour
         updateDropdown(detectorInputSelector, detectorClient.inputOptions);
     }
 
-    
-
     void updateDropdown(Dropdown dropdown, List<string> values) {
         if (!matchDropdown(dropdown.options, values)) {
             dropdown.ClearOptions();

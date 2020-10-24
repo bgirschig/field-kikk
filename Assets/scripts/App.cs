@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class App : MonoBehaviour
 {
-    Canvas ui;
+    public Canvas ui;
 
     // Start is called before the first frame update
     void Start()
@@ -13,13 +13,13 @@ public class App : MonoBehaviour
         Screen.fullScreen = true;
 
         ui = GameObject.FindObjectOfType<Canvas>();
-        ui.enabled = false;
+        ui.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("m")) ui.enabled = !ui.enabled;
+        if (Input.GetKeyDown("m")) ui.gameObject.SetActive(!ui.gameObject.activeInHierarchy);
         if (Input.GetKeyDown("f")) Screen.fullScreen = !Screen.fullScreen;
     }
 }
