@@ -11,7 +11,7 @@ public class App : MonoBehaviour
     IEnumerator Start()
     {
         Application.targetFrameRate = 30;
-        Screen.fullScreen = true;
+        setFullscreen(true);
 
         yield return 0;
         ui = GameObject.FindObjectOfType<Canvas>();
@@ -22,12 +22,25 @@ public class App : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("m")) ui.gameObject.SetActive(!ui.gameObject.activeInHierarchy);
-        if (Input.GetKeyDown("f")) Screen.fullScreen = !Screen.fullScreen;
+        if (Input.GetKeyDown("f")) StartCoroutine(setFullscreen(!Screen.fullScreen));
     }
 
     // Deliberately crash the app to see if it restarts properly
     public void crash() {
         Debug.Log("Crashing the app");
         Utils.ForceCrash(ForcedCrashCategory.FatalError);
+    }
+
+    private IEnumerator setFullscreen(bool fullscreen) {
+        Screen.fullScreen = fullscreen;
+
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+
+        Screen.SetResolution(
+            Display.main.systemWidth,
+            Display.main.systemHeight,
+            Screen.fullScreen
+        );
     }
 }
